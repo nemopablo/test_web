@@ -199,6 +199,9 @@ a { color: var(--accent); }
   box-shadow: 0 12px 30px rgba(60, 50, 30, 0.16); font-size: 0.9rem; color: var(--muted);
 }
 .cookie-notice[hidden] { display: none; }
+.cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.cookie-actions .btn { flex: 1; }
+.btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--muted); }
 .cookie-notice p { margin: 0; }
 .cookie-notice strong { color: var(--ink); }
 
