@@ -265,7 +265,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
   padding: 20px 22px; cursor: pointer; list-style: none;
 }
 .faq summary::-webkit-details-marker { display: none; }
-.faq-num { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.06em; color: var(--accent); }
 .faq-q { flex: 1; font-size: 1.08rem; font-weight: 700; line-height: 1.35; }
 .faq-toggle {
   position: relative; flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
@@ -282,7 +281,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
 .faq details[open] .faq-toggle::before, .faq details[open] .faq-toggle::after { background: var(--accent-ink); }
 .faq details[open] .faq-toggle::after { transform: rotate(0deg); }
 .faq details p {
-  margin: 0; padding: 0 72px 22px 58px; color: var(--muted);
+  margin: 0; padding: 0 72px 22px 22px; color: var(--muted);
   animation: faq-in 0.25s ease;
 }
 @keyframes faq-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
