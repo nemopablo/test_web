@@ -234,3 +234,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
   .mobile-bar .btn { padding: 14px 10px; }
   .cookie-notice { bottom: 88px; flex-direction: column; align-items: stretch; }
 }
+
+.copyright { color: var(--ink); }
+.copyright small { color: var(--muted); font-size: 0.92em; }
