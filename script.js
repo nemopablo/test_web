@@ -7,9 +7,22 @@
   // ---------------------------------------------------------------
 
   var CONSENT_KEY = 'cookieConsent';
+  var trackingConfigured = !!(GA_ID || ADS_ID);
 
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
+
+  var notice = document.getElementById('cookie-notice');
+  var accept = document.getElementById('cookie-accept');
+  var reject = document.getElementById('cookie-reject');
+  var settingsLinks = document.querySelectorAll('a[href$="#cookie-settings"]');
+
+  // Until tracking IDs are set there is nothing to consent to, so the
+  // banner and the "Cookie settings" link stay hidden.
+  if (!trackingConfigured) {
+    settingsLinks.forEach(function (link) { link.hidden = true; });
+    return;
+  }
 
   function getConsent() {
     try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; }
@@ -24,8 +37,7 @@
   // Nothing from Google is loaded until the visitor accepts.
   var trackingLoaded = false;
   function loadTracking() {
-    var primaryId = GA_ID || ADS_ID;
-    if (trackingLoaded || !primaryId) return;
+    if (trackingLoaded) return;
     trackingLoaded = true;
 
     gtag('consent', 'default', {
@@ -40,7 +52,7 @@
 
     var s = document.createElement('script');
     s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(primaryId);
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID || ADS_ID);
     document.head.appendChild(s);
   }
 
@@ -72,10 +84,6 @@
   });
 
   // Consent banner
-  var notice = document.getElementById('cookie-notice');
-  var accept = document.getElementById('cookie-accept');
-  var reject = document.getElementById('cookie-reject');
-
   if (getConsent() === 'granted') loadTracking();
   if (!notice || !accept || !reject) return;
 
