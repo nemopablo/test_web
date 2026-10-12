@@ -292,3 +292,4 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
   .faq summary { padding: 18px 16px; gap: 12px; }
   .faq details p { padding: 0 16px 20px 16px; }
 }
+.faq-intro .eyebrow { font-size: 1rem; padding: 8px 16px; letter-spacing: 0.1em; }
