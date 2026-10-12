@@ -1,4 +1,13 @@
 (function () {
+  // The technical *.pages.dev address serves the same site: send visitors to the real domain.
+  if (location.hostname.slice(-10) === '.pages.dev') {
+    var canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      location.replace(new URL(location.pathname + location.hash, canonical.href).href);
+      return;
+    }
+  }
+
   // ---- Tracking settings: fill these in before launching ads ----
   var GA_ID = '';                 // Google Analytics 4, e.g. 'G-XXXXXXXXXX'
   var ADS_ID = '';                // Google Ads, e.g. 'AW-123456789'
