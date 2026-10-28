@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://londonlocksmith.me.uk/sitemap.xml
+Sitemap: https://londonlocksmith24hr.co.uk/sitemap.xml
