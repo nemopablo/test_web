@@ -10,9 +10,9 @@
 
   // ---- Tracking settings: fill these in before launching ads ----
   var GA_ID = '';                 // Google Analytics 4, e.g. 'G-XXXXXXXXXX'
-  var ADS_ID = '';                // Google Ads, e.g. 'AW-123456789'
-  var ADS_CALL_LABEL = '';        // Google Ads conversion label for phone clicks
-  var ADS_WHATSAPP_LABEL = '';    // Google Ads conversion label for WhatsApp clicks
+  var ADS_ID = 'AW-18540395911';              // Google Ads, e.g. 'AW-123456789'
+  var ADS_CALL_LABEL = 'XYkgCLnmm60dEIf734hF';      // Google Ads conversion label for phone clicks
+  var ADS_WHATSAPP_LABEL = 'fZsECLzmm60dEIf734hF';  // Google Ads conversion label for WhatsApp clicks
   // ---------------------------------------------------------------
 
   var CONSENT_KEY = 'cookieConsent';
