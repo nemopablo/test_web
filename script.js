@@ -21,6 +21,32 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
+  // Our own click counter: works without consent because it sets no cookies,
+  // stores nothing in the browser and sends nothing that identifies the visitor.
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!link || !navigator.sendBeacon) return;
+    var href = link.getAttribute('href');
+    var type = href.indexOf('tel:') === 0 ? 'call' : href.indexOf('wa.me') !== -1 ? 'whatsapp' : '';
+    if (!type) return;
+
+    var params = new URLSearchParams(location.search);
+    var referrerHost = '';
+    try { referrerHost = document.referrer ? new URL(document.referrer).hostname : ''; } catch (err) {}
+    var source = params.has('gclid') || params.has('gbraid') || params.has('wbraid') ? 'ads'
+      : !referrerHost ? 'direct'
+      : referrerHost === location.hostname ? 'site'
+      : /(^|\.)google\./.test(referrerHost) ? 'google'
+      : 'other';
+
+    navigator.sendBeacon('/api/click', JSON.stringify({
+      type: type,
+      source: source,
+      device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+      page: location.pathname
+    }));
+  });
+
   var notice = document.getElementById('cookie-notice');
   var accept = document.getElementById('cookie-accept');
   var reject = document.getElementById('cookie-reject');
