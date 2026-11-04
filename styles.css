@@ -293,3 +293,20 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
   .faq details p { padding: 0 16px 20px 16px; }
 }
 .faq-intro .eyebrow { font-size: 1rem; padding: 8px 16px; letter-spacing: 0.1em; }
+
+/* Google rating & reviews */
+.rating {
+  display: inline-flex; align-items: center; gap: 6px; margin: 0 0 18px;
+  color: var(--ink); text-decoration: none; font-weight: 600;
+}
+.rating:hover strong, .rating:hover { color: var(--accent); }
+.rating-stars { color: #e3a008; letter-spacing: 2px; }
+.review {
+  margin: 0 0 28px; max-width: 760px; padding: 28px 30px;
+  background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+  border-radius: 14px;
+}
+.review .rating-stars { margin: 0 0 10px; font-size: 1.2rem; }
+.review blockquote { margin: 0 0 14px; font-size: 1.15rem; line-height: 1.5; }
+.review figcaption { color: var(--muted); font-weight: 600; font-size: 0.95rem; }
+.company-details { font-size: 0.85rem; }
