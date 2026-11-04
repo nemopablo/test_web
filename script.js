@@ -21,16 +21,36 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
-  // Review arrows (only shown on phones, where the reviews scroll sideways).
+  // Review slider (only active on phones, where one review fills the width).
   var track = document.getElementById('reviews-track');
-  if (track) {
-    document.querySelectorAll('.reviews-arrow').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var card = track.querySelector('.review');
-        var step = card ? card.offsetWidth + 16 : track.clientWidth;
-        track.scrollBy({ left: step * Number(btn.getAttribute('data-dir')), behavior: 'smooth' });
-      });
+  var dotsBox = document.getElementById('reviews-dots');
+  if (track && dotsBox) {
+    var slides = track.querySelectorAll('.review');
+    var prev = document.querySelector('.reviews-prev');
+    var next = document.querySelector('.reviews-next');
+    var goTo = function (i) { track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' }); };
+    var current = function () { return Math.round(track.scrollLeft / (track.clientWidth || 1)); };
+
+    var dots = Array.prototype.map.call(slides, function (_, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'reviews-dot';
+      dot.setAttribute('aria-label', 'Show review ' + (i + 1));
+      dot.addEventListener('click', function () { goTo(i); });
+      dotsBox.appendChild(dot);
+      return dot;
     });
+
+    var update = function () {
+      var i = current();
+      dots.forEach(function (dot, n) { dot.classList.toggle('active', n === i); });
+      if (prev) prev.disabled = i === 0;
+      if (next) next.disabled = i >= slides.length - 1;
+    };
+    if (prev) prev.addEventListener('click', function () { goTo(current() - 1); });
+    if (next) next.addEventListener('click', function () { goTo(current() + 1); });
+    track.addEventListener('scroll', update, { passive: true });
+    update();
   }
 
   // Our own click counter: works without consent because it sets no cookies,

@@ -312,18 +312,31 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
 .review figcaption { color: var(--muted); font-weight: 600; font-size: 0.95rem; }
 .company-details { font-size: 0.85rem; }
 
-.reviews-nav { display: none; }
+.reviews-carousel { position: relative; }
+.reviews-arrow, .reviews-dots { display: none; }
 @media (max-width: 800px) {
   .reviews {
-    display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
-    margin: 0 -20px 16px; padding: 0 20px 4px; scroll-padding: 0 20px;
-    scrollbar-width: none;
+    display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin: 0; scrollbar-width: none;
   }
   .reviews::-webkit-scrollbar { display: none; }
-  .review { flex: 0 0 85%; scroll-snap-align: start; }
-  .reviews-nav { display: flex; gap: 10px; margin: 0 0 24px; }
+  .review { flex: 0 0 100%; scroll-snap-align: center; padding: 28px 46px; }
   .reviews-arrow {
-    width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
-    background: var(--panel); color: var(--accent); font-size: 1.3rem; font-weight: 800; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    position: absolute; top: 50%; z-index: 2; transform: translateY(-50%);
+    width: 36px; height: 36px; padding: 0 0 3px; border-radius: 50%;
+    border: 1px solid rgba(44, 110, 112, 0.25); background: rgba(255, 253, 249, 0.6);
+    -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+    color: var(--accent); font-size: 1.7rem; line-height: 1; cursor: pointer;
+    transition: opacity 0.2s ease;
   }
+  .reviews-prev { left: 8px; }
+  .reviews-next { right: 8px; }
+  .reviews-arrow:disabled { opacity: 0; pointer-events: none; }
+  .reviews-dots { display: flex; justify-content: center; gap: 8px; margin: 16px 0 26px; }
+  .reviews-dot {
+    width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px;
+    background: var(--line); cursor: pointer; transition: width 0.2s ease, background 0.2s ease;
+  }
+  .reviews-dot.active { width: 22px; background: var(--accent); }
 }
