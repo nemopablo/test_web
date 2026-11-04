@@ -301,8 +301,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
 }
 .rating:hover strong, .rating:hover { color: var(--accent); }
 .rating-stars { color: #e3a008; letter-spacing: 2px; }
+.reviews { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin: 0 0 28px; }
 .review {
-  margin: 0 0 28px; max-width: 760px; padding: 28px 30px;
+  margin: 0; padding: 28px 30px;
   background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent);
   border-radius: 14px;
 }
