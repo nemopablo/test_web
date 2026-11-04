@@ -21,6 +21,18 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
+  // Review arrows (only shown on phones, where the reviews scroll sideways).
+  var track = document.getElementById('reviews-track');
+  if (track) {
+    document.querySelectorAll('.reviews-arrow').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var card = track.querySelector('.review');
+        var step = card ? card.offsetWidth + 16 : track.clientWidth;
+        track.scrollBy({ left: step * Number(btn.getAttribute('data-dir')), behavior: 'smooth' });
+      });
+    });
+  }
+
   // Our own click counter: works without consent because it sets no cookies,
   // stores nothing in the browser and sends nothing that identifies the visitor.
   document.addEventListener('click', function (e) {

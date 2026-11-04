@@ -311,3 +311,19 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
 .review blockquote { margin: 0 0 14px; font-size: 1.15rem; line-height: 1.5; }
 .review figcaption { color: var(--muted); font-weight: 600; font-size: 0.95rem; }
 .company-details { font-size: 0.85rem; }
+
+.reviews-nav { display: none; }
+@media (max-width: 800px) {
+  .reviews {
+    display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin: 0 -20px 16px; padding: 0 20px 4px; scroll-padding: 0 20px;
+    scrollbar-width: none;
+  }
+  .reviews::-webkit-scrollbar { display: none; }
+  .review { flex: 0 0 85%; scroll-snap-align: start; }
+  .reviews-nav { display: flex; gap: 10px; margin: 0 0 24px; }
+  .reviews-arrow {
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
+    background: var(--panel); color: var(--accent); font-size: 1.3rem; font-weight: 800; cursor: pointer;
+  }
+}

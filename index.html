@@ -18,7 +18,7 @@
   <meta name="theme-color" content="#f7f4ee">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=10">
+  <link rel="stylesheet" href="styles.css?v=11">
 
   <script type="application/ld+json">
   {
@@ -117,7 +117,8 @@
       <div class="container">
         <h2>What our customers say</h2>
         <p class="section-lead">Real reviews from customers on Google.</p>
-        <div class="reviews">
+        <div class="reviews-carousel">
+        <div class="reviews" id="reviews-track">
         <figure class="review">
           <p class="rating-stars" aria-label="5 out of 5 stars">★★★★★</p>
           <blockquote>You saved my day when I needed it most. The service was super polite, fast, and absolutely professional. It's such a relief knowing who to call in an emergency. Highly recommend!</blockquote>
@@ -128,6 +129,11 @@
           <blockquote>Excellent service, came within 30-40 minutes of contacting in the early hours of Sunday morning. Got the door open hassle free, would highly recommend.</blockquote>
           <figcaption>Customer review on Google</figcaption>
         </figure>
+        </div>
+        <div class="reviews-nav">
+          <button class="reviews-arrow" type="button" data-dir="-1" aria-label="Previous review">&larr;</button>
+          <button class="reviews-arrow" type="button" data-dir="1" aria-label="Next review">&rarr;</button>
+        </div>
         </div>
         <a class="btn btn-outline" href="https://search.google.com/local/reviews?placeid=ChIJu1b-jtsNJq0RPYiGe-Fjt7Y" target="_blank" rel="noopener">Read our Google reviews</a>
       </div>
@@ -332,6 +338,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=11"></script>
+  <script src="script.js?v=12"></script>
 </body>
 </html>
