@@ -21,35 +21,70 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
-  // Review slider (only active on phones, where one review fills the width).
+  // Review slider: arrows move one review, dots show where you are.
   var track = document.getElementById('reviews-track');
   var dotsBox = document.getElementById('reviews-dots');
   if (track && dotsBox) {
     var slides = track.querySelectorAll('.review');
     var prev = document.querySelector('.reviews-prev');
     var next = document.querySelector('.reviews-next');
-    var goTo = function (i) { track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' }); };
-    var current = function () { return Math.round(track.scrollLeft / (track.clientWidth || 1)); };
+    var dots = [];
+    var target = null; // where a click is still scrolling to, so quick double clicks add up
+    var settle;
+    var step = function () {
+      return slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : track.clientWidth;
+    };
+    var lastIndex = function () {
+      return Math.max(0, slides.length - Math.round(track.clientWidth / step()));
+    };
+    var current = function () { return Math.min(lastIndex(), Math.round(track.scrollLeft / step())); };
+    var goTo = function (i) {
+      i = Math.max(0, Math.min(lastIndex(), i));
+      target = i;
+      update();
+      track.scrollTo({ left: i * step(), behavior: 'smooth' });
+      // If smooth scrolling is cut short or unsupported, finish the move without animation.
+      clearTimeout(settle);
+      settle = setTimeout(function () {
+        if (target === null) return;
+        if (Math.abs(track.scrollLeft - target * step()) > 2) track.scrollTo({ left: target * step() });
+        target = null;
+        update();
+      }, 700);
+    };
 
-    var dots = Array.prototype.map.call(slides, function (_, i) {
-      var dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'reviews-dot';
-      dot.setAttribute('aria-label', 'Show review ' + (i + 1));
-      dot.addEventListener('click', function () { goTo(i); });
-      dotsBox.appendChild(dot);
-      return dot;
-    });
-
+    var buildDots = function () {
+      dotsBox.innerHTML = '';
+      dots = [];
+      for (var i = 0; i <= lastIndex(); i++) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'reviews-dot';
+        dot.setAttribute('aria-label', 'Show review ' + (i + 1));
+        dot.addEventListener('click', goTo.bind(null, i));
+        dotsBox.appendChild(dot);
+        dots.push(dot);
+      }
+      dotsBox.hidden = dots.length < 2;
+    };
+    var position = function () { return target !== null ? target : current(); };
     var update = function () {
-      var i = current();
+      var i = position();
       dots.forEach(function (dot, n) { dot.classList.toggle('active', n === i); });
       if (prev) prev.disabled = i === 0;
-      if (next) next.disabled = i >= slides.length - 1;
+      if (next) next.disabled = i >= lastIndex();
+      // On phones the box follows the height of the review on screen, so short reviews leave no gap.
+      track.style.height = window.innerWidth <= 800 && slides[i] ? Math.ceil(slides[i].getBoundingClientRect().height) + 'px' : '';
     };
-    if (prev) prev.addEventListener('click', function () { goTo(current() - 1); });
-    if (next) next.addEventListener('click', function () { goTo(current() + 1); });
-    track.addEventListener('scroll', update, { passive: true });
+
+    if (prev) prev.addEventListener('click', function () { goTo(position() - 1); });
+    if (next) next.addEventListener('click', function () { goTo(position() + 1); });
+    track.addEventListener('scroll', function () {
+      if (target !== null && Math.abs(track.scrollLeft - target * step()) < 2) target = null;
+      update();
+    }, { passive: true });
+    window.addEventListener('resize', function () { buildDots(); update(); });
+    buildDots();
     update();
   }
 
