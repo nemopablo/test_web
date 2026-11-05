@@ -340,3 +340,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
   }
   .reviews-dot.active { width: 22px; background: var(--accent); }
 }
+
+.review { display: flex; flex-direction: column; }
+.review figcaption { margin-top: auto; }
