@@ -156,12 +156,18 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
 /* About */
 .about { display: grid; gap: 40px; grid-template-columns: 1.1fr 1fr; align-items: center; }
 .about p { color: var(--muted); }
-.about-photo { margin: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.about-photo .slider { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.about-slides {
+  display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.about-slides::-webkit-scrollbar { display: none; }
+.about-slides figure { flex: 0 0 100%; margin: 0; scroll-snap-align: start; }
 .about-photo img {
   display: block; width: 100%; height: auto; aspect-ratio: 4 / 3;
-  object-fit: cover; object-position: 80% center;
-  filter: saturate(0.85);
+  object-fit: cover; filter: saturate(0.85);
 }
+.about-photo img.pos-right { object-position: 80% center; }
+.about-photo .slider-dots { margin-bottom: 0; }
 .stats { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); }
 .stats li {
   background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent);
