@@ -21,13 +21,15 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
-  // Review slider: arrows move one review, dots show where you are.
-  var track = document.getElementById('reviews-track');
-  var dotsBox = document.getElementById('reviews-dots');
-  if (track && dotsBox) {
-    var slides = track.querySelectorAll('.review');
-    var prev = document.querySelector('.reviews-prev');
-    var next = document.querySelector('.reviews-next');
+  // Sliders (reviews, recent jobs): arrows move one card, dots show where you are.
+  document.querySelectorAll('[data-slider]').forEach(function (box) {
+    var track = box.querySelector('[data-slider-track]');
+    var dotsBox = box.nextElementSibling && box.nextElementSibling.hasAttribute('data-slider-dots') ? box.nextElementSibling : null;
+    if (!track || !dotsBox) return;
+    var slides = track.children;
+    var prev = box.querySelector('.slider-prev');
+    var next = box.querySelector('.slider-next');
+    var autoHeight = box.hasAttribute('data-autoheight');
     var dots = [];
     var target = null; // where a click is still scrolling to, so quick double clicks add up
     var settle;
@@ -59,8 +61,8 @@
       for (var i = 0; i <= lastIndex(); i++) {
         var dot = document.createElement('button');
         dot.type = 'button';
-        dot.className = 'reviews-dot';
-        dot.setAttribute('aria-label', 'Show review ' + (i + 1));
+        dot.className = 'slider-dot';
+        dot.setAttribute('aria-label', 'Go to ' + (i + 1));
         dot.addEventListener('click', goTo.bind(null, i));
         dotsBox.appendChild(dot);
         dots.push(dot);
@@ -73,8 +75,8 @@
       dots.forEach(function (dot, n) { dot.classList.toggle('active', n === i); });
       if (prev) prev.disabled = i === 0;
       if (next) next.disabled = i >= lastIndex();
-      // On phones the box follows the height of the review on screen, so short reviews leave no gap.
-      track.style.height = window.innerWidth <= 800 && slides[i] ? Math.ceil(slides[i].getBoundingClientRect().height) + 'px' : '';
+      // On phones the reviews box follows the height of the review on screen, so short reviews leave no gap.
+      if (autoHeight) track.style.height = window.innerWidth <= 800 && slides[i] ? Math.ceil(slides[i].getBoundingClientRect().height) + 'px' : '';
     };
 
     if (prev) prev.addEventListener('click', function () { goTo(position() - 1); });
@@ -86,7 +88,7 @@
     window.addEventListener('resize', function () { buildDots(); update(); });
     buildDots();
     update();
-  }
+  });
 
   // Our own click counter: works without consent because it sets no cookies,
   // stores nothing in the browser and sends nothing that identifies the visitor.

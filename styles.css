@@ -301,8 +301,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
 }
 .rating:hover strong, .rating:hover { color: var(--accent); }
 .rating-stars { color: #e3a008; letter-spacing: 2px; }
-/* Reviews slider: two cards per view on computers, one on phones */
-.reviews-carousel { position: relative; }
+/* Sliders (reviews, recent jobs): arrows over the cards, dots underneath */
+.slider { position: relative; }
 .reviews {
   display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
   margin: 0; scrollbar-width: none;
@@ -320,7 +320,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
 .review figcaption { margin-top: auto; color: var(--muted); font-weight: 600; font-size: 0.95rem; }
 .company-details { font-size: 0.85rem; }
 
-.reviews-arrow {
+.slider-arrow {
   display: flex; align-items: center; justify-content: center;
   position: absolute; top: 50%; z-index: 2; transform: translateY(-50%);
   width: 42px; height: 42px; padding: 0 0 3px; border-radius: 50%;
@@ -329,33 +329,38 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
   color: var(--accent); font-size: 1.9rem; line-height: 1; cursor: pointer;
   transition: opacity 0.2s ease, background 0.2s ease;
 }
-.reviews-arrow:hover { background: rgba(255, 253, 249, 0.9); }
-.reviews-prev { left: 10px; }
-.reviews-next { right: 10px; }
-.reviews-arrow:disabled { opacity: 0; pointer-events: none; }
-.reviews-dots { display: flex; justify-content: center; gap: 8px; margin: 18px 0 26px; }
-.reviews-dot {
+.slider-arrow:hover { background: rgba(255, 253, 249, 0.9); }
+.slider-prev { left: 10px; }
+.slider-next { right: 10px; }
+.slider-arrow:disabled { opacity: 0; pointer-events: none; }
+.slider-dots { display: flex; justify-content: center; gap: 8px; margin: 18px 0 26px; }
+.slider-dot {
   width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px;
   background: var(--line); cursor: pointer; transition: width 0.2s ease, background 0.2s ease;
 }
-.reviews-dot.active { width: 22px; background: var(--accent); }
+.slider-dot.active { width: 22px; background: var(--accent); }
 
 @media (max-width: 800px) {
   .reviews { align-items: flex-start; overflow-y: hidden; transition: height 0.3s ease; }
   .review { flex-basis: 100%; padding: 28px 46px; }
-  .reviews-arrow { width: 36px; height: 36px; font-size: 1.7rem; }
-  .reviews-prev { left: 8px; }
-  .reviews-next { right: 8px; }
+  .slider-arrow { width: 36px; height: 36px; font-size: 1.7rem; }
+  .slider-prev { left: 8px; }
+  .slider-next { right: 8px; }
 }
 
-/* Recent jobs */
-.work-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+/* Recent jobs: three photos per view on computers, two on phones */
+.work-grid {
+  display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.work-grid::-webkit-scrollbar { display: none; }
 .work-grid figure {
+  flex: 0 0 calc((100% - 32px) / 3); scroll-snap-align: start;
   margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--panel);
 }
 .work-grid img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
 .work-grid figcaption { padding: 12px 14px; font-weight: 700; font-size: 0.95rem; }
 @media (max-width: 800px) {
-  .work-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .work-grid { gap: 12px; }
+  .work-grid figure { flex-basis: calc((100% - 12px) / 2); }
   .work-grid figcaption { padding: 10px 12px; font-size: 0.85rem; }
 }

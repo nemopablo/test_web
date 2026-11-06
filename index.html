@@ -18,7 +18,7 @@
   <meta name="theme-color" content="#f7f4ee">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=16">
+  <link rel="stylesheet" href="styles.css?v=17">
 
   <script type="application/ld+json">
   {
@@ -117,8 +117,8 @@
       <div class="container">
         <h2>What our customers say</h2>
         <p class="section-lead">Real reviews from customers on Google.</p>
-        <div class="reviews-carousel">
-        <div class="reviews" id="reviews-track">
+        <div class="slider" data-slider data-autoheight>
+        <div class="reviews" data-slider-track>
         <figure class="review">
           <p class="rating-stars" aria-label="5 out of 5 stars">★★★★★</p>
           <blockquote>You saved my day when I needed it most. The service was super polite, fast, and absolutely professional. It's such a relief knowing who to call in an emergency. Highly recommend!</blockquote>
@@ -140,10 +140,10 @@
           <figcaption>Customer review on Google</figcaption>
         </figure>
         </div>
-          <button class="reviews-arrow reviews-prev" type="button" data-dir="-1" aria-label="Previous review">&lsaquo;</button>
-          <button class="reviews-arrow reviews-next" type="button" data-dir="1" aria-label="Next review">&rsaquo;</button>
+          <button class="slider-arrow slider-prev" type="button" data-dir="-1" aria-label="Previous review">&lsaquo;</button>
+          <button class="slider-arrow slider-next" type="button" data-dir="1" aria-label="Next review">&rsaquo;</button>
         </div>
-        <div class="reviews-dots" id="reviews-dots"></div>
+        <div class="slider-dots" data-slider-dots></div>
         <a class="btn btn-outline" href="https://search.google.com/local/reviews?placeid=ChIJu1b-jtsNJq0RPYiGe-Fjt7Y" target="_blank" rel="noopener">Read our Google reviews</a>
       </div>
     </section>
@@ -152,7 +152,8 @@
       <div class="container">
         <h2>Recent jobs</h2>
         <p class="section-lead">A few of the locks and doors we have worked on around Croydon and South London.</p>
-        <div class="work-grid">
+        <div class="slider" data-slider>
+        <div class="work-grid" data-slider-track>
           <figure>
             <img src="images/job-internal-sashlock.jpg" alt="New sashlock and lever handles fitted to an internal wooden door" width="800" height="1000" loading="lazy">
             <figcaption>New sashlock &amp; handles fitted</figcaption>
@@ -178,6 +179,10 @@
             <figcaption>Old mortice lock replaced</figcaption>
           </figure>
         </div>
+          <button class="slider-arrow slider-prev" type="button" data-dir="-1" aria-label="Previous photo">&lsaquo;</button>
+          <button class="slider-arrow slider-next" type="button" data-dir="1" aria-label="Next photo">&rsaquo;</button>
+        </div>
+        <div class="slider-dots" data-slider-dots></div>
       </div>
     </section>
 
@@ -380,6 +385,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=14"></script>
+  <script src="script.js?v=15"></script>
 </body>
 </html>
