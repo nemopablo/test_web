@@ -347,3 +347,15 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
   .reviews-prev { left: 8px; }
   .reviews-next { right: 8px; }
 }
+
+/* Recent jobs */
+.work-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+.work-grid figure {
+  margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--panel);
+}
+.work-grid img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+.work-grid figcaption { padding: 12px 14px; font-weight: 700; font-size: 0.95rem; }
+@media (max-width: 800px) {
+  .work-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .work-grid figcaption { padding: 10px 12px; font-size: 0.85rem; }
+}
