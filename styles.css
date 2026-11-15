@@ -339,12 +339,18 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
 .slider-prev { left: 10px; }
 .slider-next { right: 10px; }
 .slider-arrow:disabled { opacity: 0; pointer-events: none; }
-.slider-dots { display: flex; justify-content: center; gap: 8px; margin: 18px 0 26px; }
+.slider-dots { display: flex; justify-content: center; gap: 2px; margin: 10px 0 18px; }
 .slider-dot {
-  width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px;
-  background: var(--line); cursor: pointer; transition: width 0.2s ease, background 0.2s ease;
+  position: relative; width: 24px; height: 24px; padding: 0; border: 0;
+  background: transparent; cursor: pointer; transition: width 0.2s ease;
 }
-.slider-dot.active { width: 22px; background: var(--accent); }
+.slider-dot::before {
+  content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 8px; height: 8px; border-radius: 4px; background: var(--line);
+  transition: width 0.2s ease, background 0.2s ease;
+}
+.slider-dot.active { width: 30px; }
+.slider-dot.active::before { width: 22px; background: var(--accent); }
 
 @media (max-width: 800px) {
   .reviews { align-items: flex-start; overflow-y: hidden; transition: height 0.3s ease; }
