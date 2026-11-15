@@ -230,7 +230,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
       url("images/keys.jpg") center / cover no-repeat,
       var(--bg);
   }
-  .cta-row .btn { flex: 1 1 150px; }
+  .cta-row .btn { flex: 1 1 140px; padding: 15px 14px; white-space: nowrap; }
   body { padding-bottom: 76px; }
   .mobile-bar {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
