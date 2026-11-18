@@ -21,7 +21,7 @@ export async function onRequestGet({ request, env }) {
   let rows = [];
   try {
     const result = await env.DB.prepare(detail
-      ? `SELECT ts, type, source, device, country, page FROM clicks WHERE day >= ? ORDER BY ts`
+      ? `SELECT * FROM clicks WHERE day >= ? ORDER BY ts`
       :
       `SELECT day, type, source, device, COUNT(*) AS clicks FROM clicks
        WHERE day >= ? GROUP BY day, type, source, device ORDER BY day, type, source, device`
