@@ -94,6 +94,12 @@
   // stores nothing in the browser and sends nothing that identifies the visitor.
   // VISIT_ID is random per page load, only so taps from one visit can be grouped.
   var VISIT_ID = Math.random().toString(36).slice(2, 8);
+  // Short one-way code of the ad click id, so taps from the same ad click can be grouped.
+  function shortHash(str) {
+    var h = 5381;
+    for (var i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) >>> 0;
+    return h.toString(36).slice(0, 6);
+  }
   document.addEventListener('click', function (e) {
     var link = e.target.closest ? e.target.closest('a[href]') : null;
     if (!link || !navigator.sendBeacon) return;
@@ -114,7 +120,7 @@
     navigator.sendBeacon('/api/click', JSON.stringify({
       type: type,
       visit: VISIT_ID,
-      adclick: adId ? adId.slice(-6) : '',
+      adclick: adId ? shortHash(adId) : '',
       source: source,
       device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
       page: location.pathname

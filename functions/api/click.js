@@ -1,5 +1,5 @@
 // Counts taps on the call and WhatsApp buttons. No cookies, no IP address, nothing that identifies a visitor.
-// "visit" is a random id made per page load, "adclick" the last 6 characters of the ad click id: both only group taps together.
+// "visit" is a random id made per page load, "adclick" a short one-way code of the ad click id: both only group taps together.
 const TYPES = ['call', 'whatsapp'];
 const SOURCES = ['ads', 'google', 'other', 'direct', 'site'];
 const DEVICES = ['mobile', 'desktop'];
